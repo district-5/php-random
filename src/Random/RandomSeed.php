@@ -32,7 +32,15 @@ class RandomSeed
      */
     public static function get(): int
     {
+        $unique = str_split(uniqid());
+        $additional = '';
+        foreach ($unique as $u) {
+            $additional .= ord($u);
+        }
+        if (substr($additional, 0, 1) === '0') {
+            $additional = strval(rand(0, 9)) . $additional;
+        }
         list($uSec, $sec) = explode(' ', strval(microtime()));
-        return intval((floatval($sec) + floatval($uSec) * mt_getrandmax()));
+        return (intval((floatval($sec) + intval($additional) + floatval($uSec) * mt_getrandmax())));
     }
 }
