@@ -36,6 +36,7 @@ Generate... well... random stuff.
 #### Generate a random guid:
 
 ```php
+<?php
 $cost = 64;
 $includeHyphens = true;
 
@@ -45,6 +46,7 @@ $guid = \District5\Random\RandomGuid::get($cost, $includeHyphens); // Returns `s
 #### Generate a random string:
 
 ```php
+<?php
 $length = 16;
 
 $string = \District5\Random\RandomString::get($length); // Returns `string(16) "5FXSgIzbvahPB9ef"`
@@ -52,6 +54,24 @@ $string = \District5\Random\RandomString::get($length); // Returns `string(16) "
 // Or you can ignore some characters...
 $ignoreCharacters = ['1', 'i', 'I', '0', 'O', 'o'];
 $string = \District5\Random\RandomString::get($length, $ignoreCharacters); // Returns `string(16) "5FXSgkzbvahPB9ef"`
+```
+
+#### Generate a random password:
+
+```php
+<?php
+$length = 8;
+$includeUppercase = true;
+$includeLowercase = true;
+$includeNumber = true;
+$includeSpecial = true;
+$password = \District5\Random\RandomPassword::get(
+    $length,
+    $includeUppercase,
+    $includeLowercase,
+    $includeNumber,
+    $includeSpecial
+); // Returns `string(8) "<7[T%X*c"`
 ```
 
 #### Generate a random integer:

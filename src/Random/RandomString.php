@@ -27,9 +27,11 @@ class RandomString
 {
     const ALL_ALPHANUMERIC_CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
     const UPPERCASE_ALPHANUMERIC_CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    const LOWERCASE_ALPHANUMERIC_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz';
     const UPPERCASE_ALPHA_CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const NUMERIC_CHARACTERS = '1234567890';
     const HEX_CHARACTERS = 'abcdef1234567890';
+    const SPECIAL_CHARACTERS = '!"#$%&\\\'()*+,-./:;<=>?@[\]^_`{|}~';
 
     /**
      * Get a random string.
@@ -111,6 +113,18 @@ class RandomString
     }
 
     /**
+     * Generates pseudo-unique lowercase alpha string
+     *
+     * @param int $length The length of the string to generate
+     *
+     * @return string The unique string
+     */
+    public static function lowercaseAlpha($length = 16)
+    {
+        return self::generateUniqueString($length, self::LOWERCASE_ALPHANUMERIC_CHARACTERS);
+    }
+
+    /**
      * Generates pseudo-unique numeric string
      *
      * @param int $length The length of the string to generate
@@ -120,6 +134,18 @@ class RandomString
     public static function numeric($length = 8)
     {
         return self::generateUniqueString($length, self::NUMERIC_CHARACTERS);
+    }
+
+    /**
+     * Generates pseudo-unique special character string
+     *
+     * @param int $length The length of the string to generate
+     *
+     * @return string The unique string
+     */
+    public static function special($length = 8)
+    {
+        return self::generateUniqueString($length, self::SPECIAL_CHARACTERS);
     }
 
     /**
