@@ -49,4 +49,70 @@ class RandomStringTest extends TestCase
         $random = RandomString::generateUniqueString(16, $chars);
         $this->assertEquals(16, strlen($random));
     }
+
+    public function testHex()
+    {
+        $generated = RandomString::hex(24);
+        $chars = $this->explodeChars(RandomString::HEX_CHARACTERS);
+        $exploded = str_split($generated);
+        $i = 0;
+        foreach ($exploded as $v) {
+            $i++;
+            $this->assertArrayHasKey($v, $chars);
+        }
+        $this->assertEquals(strlen($generated), $i);
+    }
+
+    public function testNumeric()
+    {
+        $generated = RandomString::numeric(24);
+        $chars = $this->explodeChars(RandomString::NUMERIC_CHARACTERS);
+        $exploded = str_split($generated);
+        $i = 0;
+        foreach ($exploded as $v) {
+            $i++;
+            $this->assertArrayHasKey($v, $chars);
+        }
+        $this->assertEquals(strlen($generated), $i);
+    }
+
+    public function testUppercaseAlpha()
+    {
+        $generated = RandomString::uppercaseAlpha(24);
+        $chars = $this->explodeChars(RandomString::UPPERCASE_ALPHA_CHARACTERS);
+        $exploded = str_split($generated);
+        $i = 0;
+        foreach ($exploded as $v) {
+            $i++;
+            $this->assertArrayHasKey($v, $chars);
+        }
+        $this->assertEquals(strlen($generated), $i);
+    }
+
+    public function testUppercaseAlphanumeric()
+    {
+        $generated = RandomString::uppercaseAlphanumeric(24);
+        $chars = $this->explodeChars(RandomString::UPPERCASE_ALPHANUMERIC_CHARACTERS);
+        $exploded = str_split($generated);
+        $i = 0;
+        foreach ($exploded as $v) {
+            $i++;
+            $this->assertArrayHasKey($v, $chars);
+        }
+        $this->assertEquals(strlen($generated), $i);
+    }
+
+    /**
+     * @param string $chars
+     * @return array
+     */
+    private function explodeChars($chars)
+    {
+        $new = [];
+        $split = str_split($chars);
+        foreach ($split as $item) {
+            $new[$item] = $item;
+        }
+        return $new;
+    }
 }
