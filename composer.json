@@ -1,0 +1,25 @@
+{
+  "name": "district-5/random",
+  "description": "Helpful randomness",
+  "keywords": ["random", "php"],
+  "homepage": "https://github.com/district-5/random",
+  "license": "Proprietary",
+  "authors": [
+    {
+      "name": "Roger Thomas",
+      "email": "roger.thomas@district5.co.uk"
+    }
+  ],
+  "require": {
+    "php": ">=7.1"
+  },
+  "autoload": {
+    "psr-4": { "District5\\Random\\": "src/Random/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "District5\\RandomTests\\": "tests/RandomTests/" }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6"
+  }
+}

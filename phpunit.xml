@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="vendor/autoload.php" colors="true">
+    <testsuites>
+        <testsuite name="All Random Tests">
+            <directory>tests/RandomTests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>src/Random</directory>
+            <exclude>
+                <directory>tests/RandomTests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>
