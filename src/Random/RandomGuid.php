@@ -43,7 +43,7 @@ class RandomGuid
         $randChars = [];
         $c = 0;
         while ($c < $cost) {
-            $randChars[] = strtoupper(md5(uniqid(mt_rand(), true)));
+            $randChars[] = md5(uniqid(mt_rand(), true));
             $c++;
         }
         $hyphen = '';
@@ -64,3 +64,5 @@ class RandomGuid
         );
     }
 }
+
+class_alias('\District5\Random\RandomGuid', '\District5\Random\RandomUuid');

@@ -42,4 +42,11 @@ class RandomStringTest extends TestCase
             $this->assertFalse(strstr($random, $char));
         }
     }
+
+    public function testGetWithSpecificCharacter()
+    {
+        $chars = 'abcde';
+        $random = RandomString::generateUniqueString(16, $chars);
+        $this->assertEquals(16, strlen($random));
+    }
 }

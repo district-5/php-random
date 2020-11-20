@@ -20,6 +20,7 @@
 namespace District5\RandomTests;
 
 use District5\Random\RandomGuid;
+use District5\Random\RandomUuid;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -32,5 +33,11 @@ class RandomGuidTest extends TestCase
     {
         $this->assertEquals(36, strlen(RandomGuid::get(64, true)));
         $this->assertEquals(32, strlen(RandomGuid::get(64, false)));
+    }
+
+    public function testSimpleViaAlias()
+    {
+        $this->assertEquals(36, strlen(RandomUuid::get(64, true)));
+        $this->assertEquals(32, strlen(RandomUuid::get(64, false)));
     }
 }

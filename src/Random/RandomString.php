@@ -25,6 +25,12 @@ namespace District5\Random;
  */
 class RandomString
 {
+    const ALL_ALPHANUMERIC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    const UPPERCASE_ALPHANUMERIC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    const UPPERCASE_ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const NUMERIC = '1234567890';
+    const HEX_CHARACTERS = 'abcdef1234567890';
+
     /**
      * Get a random string.
      * @param int $length
@@ -58,5 +64,82 @@ class RandomString
             $s .= $all[mt_rand(0, ($totalInHaystack-1))];
         }
         return $s;
+    }
+
+    /**
+     * Generates a pseudo-unique string
+     *
+     * @param int $length The length of the string to generate
+     * @param string $chars The available characters to include in the string generation
+     *
+     * @return string The unique string
+     */
+    public static function generateUniqueString($length = 16, $chars = self::ALL_ALPHANUMERIC)
+    {
+        $splitCharacters = str_split($chars);
+        // Start our string
+        $string = RandomArrayItem::get($splitCharacters);
+
+        // Generate random string
+        for ($i = 1; $i < $length; $i = strlen($string)) {
+            // Grab a random character from our list
+            $r = RandomArrayItem::get($splitCharacters);
+
+            // Make sure the same two characters don't appear next to each other
+            if ($r != substr($string, -1)) {
+                $string .= $r;
+            }
+        }
+
+        // Return the string
+        return $string;
+    }
+
+    /**
+     * Generates pseudo-unique uppercase alphanumeric string
+     *
+     * @param int $length The length of the string to generate
+     *
+     * @return string The unique string
+     */
+    public static function generateUniqueUppercaseString($length = 16)
+    {
+        return self::generateUniqueString($length, self::UPPERCASE_ALPHANUMERIC);
+    }
+
+    /**
+     * Generates pseudo-unique uppercase alpha string
+     *
+     * @param int $length The length of the string to generate
+     *
+     * @return string The unique string
+     */
+    public static function generateUniqueUppercaseAlphaString($length = 16)
+    {
+        return self::generateUniqueString($length, self::UPPERCASE_ALPHA);
+    }
+
+    /**
+     * Generates pseudo-unique numeric string
+     *
+     * @param int $length The length of the string to generate
+     *
+     * @return string The unique string
+     */
+    public static function numericString($length = 8)
+    {
+        return self::generateUniqueString($length, self::NUMERIC);
+    }
+
+    /**
+     * Generates pseudo-unique hexadecimal string
+     *
+     * @param int $length The length of the string to generate
+     *
+     * @return string The unique string
+     */
+    public static function generateUniqueHexString($length = 24)
+    {
+        return self::generateUniqueString($length, self::HEX_CHARACTERS);
     }
 }
