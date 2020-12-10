@@ -9,8 +9,8 @@ job("PHPUnit") {
         shellScript {
             content = """
                 DEBIAN_FRONTEND=noninteractive
-                apt-get update
-                apt-get install php curl -y
+                DEBIAN_FRONTEND=noninteractive apt-get update
+                DEBIAN_FRONTEND=noninteractive apt-get install php curl -y
                 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
                 composer install
                 ./vendor/bin/phpunit
