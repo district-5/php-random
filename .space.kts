@@ -11,7 +11,7 @@ job("PHPUnit") {
                 DEBIAN_FRONTEND=noninteractive apt-get update
                 DEBIAN_FRONTEND=noninteractive apt-get install git zip unzip curl -y
                 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-                composer install
+                composer update
                 ./vendor/bin/phpunit
             """
         }
