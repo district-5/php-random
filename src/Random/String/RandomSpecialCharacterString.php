@@ -32,7 +32,7 @@ class RandomSpecialCharacterString extends AbstractRandomStringWithCharacterSet
      *
      * @return string The unique string
      */
-    public static function special($length = 8)
+    public static function get($length = 8)
     {
         return RandomAlphanumericString::get($length, self::SPECIAL_CHARACTERS);
     }
