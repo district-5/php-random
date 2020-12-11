@@ -8,9 +8,8 @@ job("PHPUnit") {
     container("php:7.1.33-cli") {
         shellScript {
             content = """
-                DEBIAN_FRONTEND=noninteractive
                 DEBIAN_FRONTEND=noninteractive apt-get update
-                DEBIAN_FRONTEND=noninteractive apt-get install git zip unzip php-cli php-xml php-mbstring curl -y
+                DEBIAN_FRONTEND=noninteractive apt-get install git zip unzip curl -y
                 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
                 composer install
                 ./vendor/bin/phpunit
