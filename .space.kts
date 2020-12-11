@@ -5,7 +5,7 @@
 */
 
 job("PHPUnit") {
-    container("ubuntu") {
+    container("php:7.1.33-cli") {
         shellScript {
             content = """
                 DEBIAN_FRONTEND=noninteractive
