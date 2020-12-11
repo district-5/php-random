@@ -37,10 +37,15 @@ class RandomSeed
         foreach ($unique as $u) {
             $additional .= ord($u);
         }
-        if (substr($additional, 0, 1) === '0') {
-            $additional = strval(rand(0, 9)) . $additional;
-        }
+
         list($uSec, $sec) = explode(' ', strval(microtime()));
-        return (intval((floatval($sec) + intval($additional) + floatval($uSec) * mt_getrandmax())));
+        $temp = (strval((floatval($sec) + intval($additional) + floatval($uSec) * mt_getrandmax())));
+        $pieces = str_split($temp);
+        shuffle($pieces);
+        $string = implode('', $pieces);
+        if (substr($string, 0, 1) === '0') {
+            $string = strval(rand(1, 9)) . substr($string, 0, -1) . '0';
+        }
+        return intval($string);
     }
 }
