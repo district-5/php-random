@@ -20,6 +20,12 @@
 namespace District5\RandomTests;
 
 use District5\Random\RandomString;
+use District5\Random\String\AbstractRandomStringWithCharacterSet;
+use District5\Random\String\RandomAlphanumericString;
+use District5\Random\String\RandomHexString;
+use District5\Random\String\RandomNumericString;
+use District5\Random\String\RandomUppercaseAlphanumericString;
+use District5\Random\String\RandomUppercaseAlphaString;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -46,14 +52,14 @@ class RandomStringTest extends TestCase
     public function testGetWithSpecificCharacter()
     {
         $chars = 'abcde';
-        $random = RandomString::generateUniqueString(16, $chars);
+        $random = RandomAlphanumericString::get(16, $chars);
         $this->assertEquals(16, strlen($random));
     }
 
     public function testHex()
     {
-        $generated = RandomString::hex(24);
-        $chars = $this->explodeChars(RandomString::HEX_CHARACTERS);
+        $generated = RandomHexString::get(24);
+        $chars = $this->explodeChars(AbstractRandomStringWithCharacterSet::HEX_CHARACTERS);
         $exploded = str_split($generated);
         $i = 0;
         foreach ($exploded as $v) {
@@ -65,8 +71,8 @@ class RandomStringTest extends TestCase
 
     public function testNumeric()
     {
-        $generated = RandomString::numeric(24);
-        $chars = $this->explodeChars(RandomString::NUMERIC_CHARACTERS);
+        $generated = RandomNumericString::get(24);
+        $chars = $this->explodeChars(AbstractRandomStringWithCharacterSet::NUMERIC_CHARACTERS);
         $exploded = str_split($generated);
         $i = 0;
         foreach ($exploded as $v) {
@@ -78,8 +84,8 @@ class RandomStringTest extends TestCase
 
     public function testUppercaseAlpha()
     {
-        $generated = RandomString::uppercaseAlpha(24);
-        $chars = $this->explodeChars(RandomString::UPPERCASE_ALPHA_CHARACTERS);
+        $generated = RandomUppercaseAlphaString::get(24);
+        $chars = $this->explodeChars(AbstractRandomStringWithCharacterSet::UPPERCASE_ALPHA_CHARACTERS);
         $exploded = str_split($generated);
         $i = 0;
         foreach ($exploded as $v) {
@@ -91,8 +97,8 @@ class RandomStringTest extends TestCase
 
     public function testUppercaseAlphanumeric()
     {
-        $generated = RandomString::uppercaseAlphanumeric(24);
-        $chars = $this->explodeChars(RandomString::UPPERCASE_ALPHANUMERIC_CHARACTERS);
+        $generated = RandomUppercaseAlphanumericString::get(24);
+        $chars = $this->explodeChars(AbstractRandomStringWithCharacterSet::UPPERCASE_ALPHANUMERIC_CHARACTERS);
         $exploded = str_split($generated);
         $i = 0;
         foreach ($exploded as $v) {

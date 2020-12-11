@@ -19,6 +19,8 @@
 
 namespace District5\Random;
 
+use District5\Random\String\RandomAlphanumericString;
+
 /**
  * Class RandomPassword
  * @package District5\Random
@@ -42,25 +44,25 @@ class RandomPassword
         if ($uppercase === true) {
             $uppercaseChars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
             $allChars .= $uppercaseChars;
-            $generated = RandomString::generateUniqueString(1, $uppercaseChars);
+            $generated = RandomAlphanumericString::get(1, $uppercaseChars);
             $chars['a' . $generated] = $generated;
         }
         if ($lowercase === true) {
             $lowercaseChars = 'abcdefghjklmnpqrstuvwxyz';
             $allChars .= $lowercaseChars;
-            $generated = RandomString::generateUniqueString(1, $lowercaseChars);
+            $generated = RandomAlphanumericString::get(1, $lowercaseChars);
             $chars['a' . $generated] = $generated;
         }
         if ($number === true) {
             $numericChars = '23456789';
             $allChars .= $numericChars;
-            $generated = RandomString::generateUniqueString(1, $numericChars);
+            $generated = RandomAlphanumericString::get(1, $numericChars);
             $chars['a' . $generated] = $generated;
         }
         if ($special === true) {
             $specialChars = '!#$%&()*+,-.:;<=>?@[\]^_`{|}~';
             $allChars .= $specialChars;
-            $generated = RandomString::generateUniqueString(1, $specialChars);
+            $generated = RandomAlphanumericString::get(1, $specialChars);
             $chars['a' . $generated] = $generated;
         }
         if (strlen($allChars) === 0 || count($chars) > $length) {
@@ -74,7 +76,7 @@ class RandomPassword
             $allChars = str_replace($aChar, '', $allChars);
         }
         $remaining = $length - count($chars);
-        $newPiece = RandomString::generateUniqueString($remaining, $allChars);
+        $newPiece = RandomAlphanumericString::get($remaining, $allChars);
         foreach (str_split($newPiece) as $newChar) {
             $chars['a' . $newChar] = $newChar;
         }
