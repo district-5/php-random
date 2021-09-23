@@ -10,11 +10,11 @@ Generate... well... random stuff.
     "repositories":[
         {
             "type": "vcs",
-            "url": "git@github.com:district-5/php-random.git"
+            "url": "git@github.com:district5/php-random.git"
         }
     ],
     "require": {
-        "district-5/random": ">=1.0.0"
+        "district5/random": ">=1.0.0"
     }
 }
 ```
