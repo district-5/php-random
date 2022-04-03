@@ -39,7 +39,8 @@ class RandomArrayItemTest extends TestCase
         $i = 0;
         while ($i < 100) {
             $item = RandomArrayItem::get($data);
-            $this->assertInternalType('string', $item);
+//            $this->assertInternalType('string', $item);
+            $this->assertIsString($item);
             $this->assertTrue(in_array($item, $data));
             $i++;
         }
@@ -56,7 +57,8 @@ class RandomArrayItemTest extends TestCase
         $i = 0;
         while ($i < 100) {
             $item = RandomArrayItem::get($data);
-            $this->assertInternalType('string', $item);
+//            $this->assertInternalType('string', $item);
+            $this->assertIsString($item);
             $this->assertTrue(in_array($item, array_values($data)));
             $i++;
         }
@@ -73,7 +75,8 @@ class RandomArrayItemTest extends TestCase
         $i = 0;
         while ($i < 100) {
             $item = RandomArrayItem::get($data);
-            $this->assertInternalType('string', $item);
+//            $this->assertInternalType('string', $item);
+            $this->assertIsString($item);
             $this->assertTrue(in_array($item, array_values($data)));
             $i++;
         }

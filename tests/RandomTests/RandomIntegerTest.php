@@ -31,7 +31,8 @@ class RandomIntegerTest extends TestCase
     public function testSimple()
     {
         $random = RandomInteger::get(0, 10);
-        $this->assertInternalType('integer', $random);
+//        $this->assertInternalType('integer', $random);
+        $this->assertIsInt($random);
         $this->assertLessThanOrEqual(10, $random);
         $this->assertGreaterThanOrEqual(0, $random);
     }

@@ -39,7 +39,8 @@ class RandomArrayKeyTest extends TestCase
         $i = 0;
         while ($i < 100) {
             $key = RandomArrayKey::get($data);
-            $this->assertInternalType('integer', $key);
+//            $this->assertInternalType('integer', $key);
+            $this->assertIsInt($key);
             $this->assertArrayHasKey($key, $data);
             $i++;
         }
@@ -56,7 +57,8 @@ class RandomArrayKeyTest extends TestCase
         $i = 0;
         while ($i < 100) {
             $key = RandomArrayKey::get($data);
-            $this->assertInternalType('string', $key);
+//            $this->assertInternalType('string', $key);
+            $this->assertIsString($key);
             $this->assertArrayHasKey($key, $data);
             $i++;
         }
