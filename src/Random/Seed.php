@@ -1,11 +1,11 @@
 <?php
+
 /**
  * District5 - Random
  *
  * @copyright District5
  *
  * @author District5
- * @author Roger Thomas <roger.thomas@district5.co.uk>
  * @link https://www.district5.co.uk
  *
  * @license This software and associated documentation (the "Software") may not be
@@ -16,22 +16,30 @@
  * all licensed copies of the Software.
  *
  */
-
 namespace District5\Random;
 
 /**
- * Class RandomSeed
+ * Class Seed
  * @package District5\Random
- * @deprecated use Seed instead
  */
-class RandomSeed
+class Seed
 {
     /**
-     * Get a random seed.
+     * Get a random seed as an integer.
      *
-     * @return int
+     * @return int Seed integer.
      */
-    public static function get(): int
+    public static function asInteger(): int
+    {
+        return intval(static::asString());
+    }
+
+    /**
+     * Get a random seed as a string.
+     *
+     * @return string Seed string.
+     */
+    private static function asString(): string
     {
         $unique = str_split(uniqid());
         $additional = '';
@@ -47,6 +55,7 @@ class RandomSeed
         if (substr($string, 0, 1) === '0') {
             $string = strval(rand(1, 9)) . substr($string, 0, -1) . '0';
         }
-        return intval($string);
+
+        return $string;
     }
 }
