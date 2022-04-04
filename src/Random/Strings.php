@@ -49,31 +49,31 @@ class Strings
      * Generates a pseudo random string using custom options.
      *
      * @param int $length The length of the string to generate.
-     * @param bool $includeAlphabetical Whether to include alphabetical characters.
-     * @param bool $includeNumeric Whether to include numeric characters.
-     * @param bool $includeSpecialChars Whether to include special characters.
+     * @param bool $allowAlphabetical Whether to allow alphabetical characters.
+     * @param bool $allowNumeric Whether to allow numeric characters.
+     * @param bool $allowSpecialChars Whether to allow special characters.
      * @param bool $excludeAmbiguous Whether to exclude potentially ambiguous characters.
      * @param array $ignoreChars List of characters to ignore when generating the string.
      *
      * @return string The pseudo random string.
      */
-    public static function custom(int $length, bool $includeAlphabetical, bool $includeNumeric, bool $includeSpecialChars, bool $excludeAmbiguous, array $ignoreChars = []): string
+    public static function custom(int $length, bool $allowAlphabetical, bool $allowNumeric, bool $allowSpecialChars, bool $excludeAmbiguous, array $ignoreChars = []): string
     {
         $chars = '';
-        if ($includeAlphabetical) {
+        if ($allowAlphabetical) {
             $chars .= static::CHARS_ALPHABETIC_LOWERCASE;
         }
 
-        if ($includeNumeric) {
+        if ($allowNumeric) {
             $chars .= static::CHARS_NUMERIC;
         }
 
-        if ($includeSpecialChars) {
+        if ($allowSpecialChars) {
             $chars .= static::CHARS_SPECIAL;
         }
 
         if ($excludeAmbiguous) {
-            $aChars = array_diff(str_split($chars), static::CHARS_AMBIGUOUS);
+            $aChars = array_diff(str_split($chars), str_split(static::CHARS_AMBIGUOUS));
             $chars = implode($aChars);
         }
 
