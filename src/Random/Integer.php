@@ -40,13 +40,7 @@ class Integer
             $max = mt_getrandmax();
         }
 
-        if ($min > $max) {
-            $tmp = $max;
-            $max = $min;
-            $min = $tmp;
-        }
-
-        return mt_rand($min, $max);
+        return $min > $max ? mt_rand($max, $min) : mt_rand($min, $max);
     }
 
     /**
