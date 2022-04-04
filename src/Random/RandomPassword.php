@@ -24,6 +24,7 @@ use District5\Random\String\RandomAlphanumericString;
 /**
  * Class RandomPassword
  * @package District5\Random
+ * @deprecated use Password instead
  */
 class RandomPassword
 {
