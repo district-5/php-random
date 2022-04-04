@@ -22,6 +22,7 @@ namespace District5\Random;
 /**
  * Class RandomInteger
  * @package District5\Random
+ * @deprecated use Integer instead
  */
 class RandomInteger
 {

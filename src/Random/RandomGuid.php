@@ -22,6 +22,7 @@ namespace District5\Random;
 /**
  * Class RandomGuid
  * @package District5\Random
+ * @deprecated use Uuid instead
  */
 class RandomGuid
 {
