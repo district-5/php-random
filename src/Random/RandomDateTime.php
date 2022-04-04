@@ -24,6 +24,7 @@ use DateTime;
 /**
  * Class RandomDateTime
  * @package District5\Random
+ * @deprecated use Dates instead
  */
 class RandomDateTime
 {
