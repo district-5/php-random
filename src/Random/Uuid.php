@@ -18,7 +18,7 @@
 namespace District5\Random;
 
 /**
- * Class UUID
+ * Class Uuid
  * @package District5\Random
  */
 class Uuid
