@@ -14,7 +14,7 @@ Generate... well... random stuff.
         }
     ],
     "require": {
-        "district5/random": ">=1.0.0"
+        "district5/random": ">=2.0.0"
     }
 }
 ```
@@ -33,134 +33,103 @@ Generate... well... random stuff.
 
 ## Common uses:
 
-#### Generate a random guid:
+#### UUID / GUID Pseudo Random
 
 ```php
-<?php
-$cost = 64;
 $includeHyphens = true;
 
-$guid = \District5\Random\RandomGuid::get($cost, $includeHyphens); // Returns `string(36) "2ED29D69-D339-1636-52D9-F68D18B5E9F8"`
+// fast UUID generator
+$uuid = \District5\Random\Uuid::simple($includeHyphens);
+
+// slower but higher entropy UUID generator
+$cost = 64;
+$uuid = \District5\Random\Uuid::highEntropy($cost, $includeHyphens);
 ```
 
-#### Generate a random string:
-
+#### String Pseudo Random
 ```php
-<?php
 $length = 16;
 
-$string = \District5\Random\RandomString::get($length); // Returns `string(16) "5FXSgIzbvahPB9ef"`
+// generate an alphanumeric string
+$str = \District5\Random\Strings::alphanumeric($length);
 
-// Or you can ignore some characters...
-$ignoreCharacters = ['1', 'i', 'I', '0', 'O', 'o'];
-$string = \District5\Random\RandomString::get($length, $ignoreCharacters); // Returns `string(16) "5FXSgkzbvahPB9ef"`
-```
+// generates an alphabetical lowercase string
+$str = \District5\Random\Strings::alphabeticLowercase($length);
 
-#### Generate a random password:
+// generates a hex string
+$str = \District5\Random\Strings::hex($length);
 
-```php
-<?php
-$length = 8;
-$includeUppercase = true;
-$includeLowercase = true;
-$includeNumber = true;
-$includeSpecial = true;
-$password = \District5\Random\RandomPassword::get(
+// generates a string using a set of allowable characters
+$str = \District5\Random\Strings::fromStringOfAllowableCharacters('abcd1234', $length);
+
+// generates a string with full custom control
+$allowAlphabetical = true;
+$allowNumeric = true;
+$allowSpecial = true;
+$excludeAmbiguous = false;
+$toIgnore = ['1', 'i', 'I', '0', 'O', 'o'];
+$forceEachType = true;
+$str = \District5\Random\Strings::custom(
     $length,
-    $includeUppercase,
-    $includeLowercase,
-    $includeNumber,
-    $includeSpecial
-); // Returns `string(8) "<7[T%X*c"`
+    $allowAlphabetical,
+    $allowNumeric,
+    $allowSpecial,
+    $excludeAmbiguous,
+    $ignoreCharacters,
+    $forceEachType
+);
 ```
 
-#### Generate a random integer:
-
+#### Password Pseudo Random
 ```php
-<?php
+// generate an 8 character single password with allowed characters including alphabetical, numerical and special
+$password = \District5\Random\Password::single(8);
+
+// generate a list of 5 x 8 character passwords
+$passwords = \District5\Random\Password::multiple(5, 8);
+```
+
+#### Integer Pseudo Random
+```php
 // Between 0 and 10
-$int = \District5\Random\RandomInteger::get(0, 10);
+$int = \District5\Random\Integer::inRange(0, 10);
 
-// Any number between 0 and X - X is the value returned from mt_getrandmax()
-$int = \District5\Random\RandomInteger::get();
+// generate an integer between 1 and mt_getrandmax()
+$int = \District5\Random\Integer::positive();
+
+// generate an integer between 1 and 55
+$int = \District5\Random\Integer::positive(55);
+
+// generate an integer between -1 and negative mt_getrandmax()
+$int = \District5\Random\Integer::negative();
+
+// generate an integer between -1 and -55
+$int = \District5\Random\Integer::negative(-55);
 ```
 
-#### Get a random key from an array:
-
+#### Array Pseudo Random
+These functions work for both default keyed arrays and associative style keyed arrays, or a combination of both.
 ```php
-<?php
-$data = [
-    'foo',
-    'bar'
-];
-$key = \District5\Random\RandomArrayKey::get($data);
+$data = ['foo', 'bar', 'dog', 'cat'];
+$key = \District5\Random\Arrays::randomKey($data);
+// $key would be in the range of 0-3 inclusive
 
-// Or use associated arrays
-$data = [
-    'name' => 'Joe',
-    'age' => 12
-];
-$key = \District5\Random\RandomArrayKey::get($data);
-
-// Or mix it up!
-$data = [
-    'name' => 'Joe',
-    'age' => 12,
-    'golf'
-];
-$key = \District5\Random\RandomArrayKey::get($data);
+$data = ['a' => 'foo', 'b' => 'bar', 'c' => 'dog', 'd' => 'cat'];
+$value = \District5\Random\Arrays::randomItem($data);
+// $value would be one of foo|bar|dog|cat
 ```
 
-#### Get a random value from an array:
-
+#### Dates(string) and DateTime Pseudo Random
 ```php
-<?php
-$data = [
-    'foo',
-    'bar'
-];
-$key = \District5\Random\RandomArrayItem::get($data);
+// generates a pseudo random DateTime between the epoch and now
+$randomDateTime = \District5\Random\Dates::dateTime();
 
-// Or use associated arrays
-$data = [
-    'name' => 'Joe',
-    'age' => 12
-];
-$key = \District5\Random\RandomArrayItem::get($data);
+// generates a pseudo random DateTime between DateTime 1 and DateTime 2.
+$randomDateTime = \District5\Random\Dates::dateTimeBetweenDateTimes($dt1, $dt2);
 
-// Or mix it up!
-$data = [
-    'name' => 'Joe',
-    'age' => 12,
-    'golf'
-];
-$key = \District5\Random\RandomArrayItem::get($data);
-```
+// generate a pseudo random date string between the epoch and now with default formatting of Y-m-d (optional argument defaulted to Y-m-d)
+$randomDateStr = \District5\Random\Dates::date('Y-m-d');
 
-#### Get a random DateTime
-
-```php
-<?php
-// Get a random DateTime between the epoch and now
-$randomDateTime = \District5\Random\RandomDateTime::get();
-
-// Or pass DateTime instances to use custom minimum and maximum dates.
-$oneDate = DateTime::createFromFormat('Y-m-d H:i:s', '2001-02-03 23:24:25');
-$anotherDate = DateTime::createFromFormat('Y-m-d H:i:s', '2020-08-09 11:10:09');
-
-$randomDateTime = \District5\Random\RandomDateTime::get($oneDate, $anotherDate);
-```
-
-#### Get a random date (string)
-
-```php
-<?php
-// Get a random date between the epoch and now
-$randomDateTime = \District5\Random\RandomDate::get();
-
-// Or change the format to mm/dd/yyyy and use DateTime instances to use custom minimum and maximum dates.
-$oneDate = DateTime::createFromFormat('Y-m-d H:i:s', '2001-02-03 23:24:25');
-$anotherDate = DateTime::createFromFormat('Y-m-d H:i:s', '2020-08-09 11:10:09');
-
-$randomDate = \District5\Random\RandomDate::get('m/d/Y', $oneDate, $anotherDate);
+// generates a pseudo random date string between DateTime 1 and DateTime 2.
+$randomDateStr = \District5\Random\Dates::dateBetweenDateTimes($dt1, $dt2, 'Y-m-d');
 ```
