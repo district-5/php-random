@@ -24,6 +24,7 @@ use District5\Random\RandomArrayItem;
 /**
  * Class RandomAlphanumericString
  * @package District5\Random\String
+ * @deprecated use Strings instead
  */
 class RandomAlphanumericString extends AbstractRandomStringWithCharacterSet
 {

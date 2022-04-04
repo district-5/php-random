@@ -22,6 +22,7 @@ namespace District5\Random\String;
 /**
  * Class RandomUppercaseAlphanumericString
  * @package District5\Random\String
+ * @deprecated use Strings instead
  */
 class RandomUppercaseAlphanumericString extends RandomLowercaseAlphanumericString
 {

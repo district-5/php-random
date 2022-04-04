@@ -24,6 +24,7 @@ use District5\Random\String\AbstractRandomStringWithCharacterSet;
 /**
  * Class RandomString
  * @package District5\Random
+ * @deprecated use Strings instead
  */
 class RandomString
 {

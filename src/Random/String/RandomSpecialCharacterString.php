@@ -22,6 +22,7 @@ namespace District5\Random\String;
 /**
  * Class RandomSpecialCharacterString
  * @package District5\Random\String
+ * @deprecated use Strings instead
  */
 class RandomSpecialCharacterString extends AbstractRandomStringWithCharacterSet
 {
