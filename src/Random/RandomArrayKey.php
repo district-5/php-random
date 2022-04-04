@@ -22,6 +22,7 @@ namespace District5\Random;
 /**
  * Class RandomArrayKey
  * @package District5\Random
+ * @deprecated use Arrays instead
  */
 class RandomArrayKey
 {
