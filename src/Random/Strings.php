@@ -54,22 +54,33 @@ class Strings
      * @param bool $allowSpecialChars Whether to allow special characters.
      * @param bool $excludeAmbiguous Whether to exclude potentially ambiguous characters.
      * @param array $ignoreChars List of characters to ignore when generating the string.
+     * @param bool $forceEachType Whether to force each type of allowed character types so at least one of each occurs, length and ambiguous characters permitting.
      *
      * @return string The pseudo random string.
      */
-    public static function custom(int $length, bool $allowAlphabetical, bool $allowNumeric, bool $allowSpecialChars, bool $excludeAmbiguous, array $ignoreChars = []): string
+    public static function custom(int $length, bool $allowAlphabetical, bool $allowNumeric, bool $allowSpecialChars, bool $excludeAmbiguous, array $ignoreChars = [], bool $forceEachType = false): string
     {
         $chars = '';
+        $strSoFar = '';
         if ($allowAlphabetical) {
-            $chars .= static::CHARS_ALPHABETIC_LOWERCASE;
+            $chars .= static::CHARS_ALPHABETIC_LOWERCASE . static::CHARS_ALPHABETIC_UPPERCASE;
+            if ($forceEachType) {
+                $strSoFar .= static::fromStringOfAllowableCharacters(static::CHARS_ALPHABETIC_LOWERCASE . static::CHARS_ALPHABETIC_UPPERCASE, 1);
+            }
         }
 
         if ($allowNumeric) {
             $chars .= static::CHARS_NUMERIC;
+            if ($forceEachType) {
+                $strSoFar .= static::fromStringOfAllowableCharacters(static::CHARS_NUMERIC, 1);
+            }
         }
 
         if ($allowSpecialChars) {
             $chars .= static::CHARS_SPECIAL;
+            if ($forceEachType) {
+                $strSoFar .= static::fromStringOfAllowableCharacters(static::CHARS_SPECIAL, 1);
+            }
         }
 
         if ($excludeAmbiguous) {
@@ -82,7 +93,28 @@ class Strings
             $chars = implode($aChars);
         }
 
-        return static::fromStringOfAllowableCharacters($chars, $length);
+        if (false === $forceEachType) {
+            // just do a standard generate...
+            return static::fromStringOfAllowableCharacters($chars, $length);
+        } else {
+            // work out how much we need to generate and account for small lengths
+            $lengthToUse = $length - strlen($strSoFar);
+            if ($lengthToUse > 0) {
+                $strSoFar .= static::fromStringOfAllowableCharacters($chars, $lengthToUse);
+            }
+
+            $strSoFar = str_split($strSoFar);
+            shuffle($strSoFar);
+            $strSoFar = implode($strSoFar);
+
+            /*
+             * if we were asked for a smaller length, such that lengthToUse < 1 we might need to shorten the string from the characters
+             * we force generated, otherwise we have the correct length and can return the combined and shuffled string
+             */
+            return strlen($strSoFar) > $length ? substr($strSoFar, 0, $length) : $strSoFar;
+        }
+
+
     }
 
     /**

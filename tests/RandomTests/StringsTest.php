@@ -28,12 +28,23 @@ use PHPUnit\Framework\TestCase;
  */
 class StringsTest extends TestCase
 {
+    public function testCustomLong()
+    {
+        $length = 12;
+
+        $generated = Strings::custom($length, true, true, true, false, [], true);
+
+        $this->assertEquals($length, strlen($generated));
+    }
+
+    // TODO: this needs tests for custom to ensure that when forceEachType is used, we do get at least 1 character from each type.
+
     public function testCustomLength()
     {
-        $desiredLength = 24;
+        $length = 24;
 
-        $generated = Strings::fromStringOfAllowableCharacters('abc123', $desiredLength);
-        $this->assertEquals($desiredLength, strlen($generated));
+        $generated = Strings::fromStringOfAllowableCharacters('abc123', $length);
+        $this->assertEquals($length, strlen($generated));
     }
 
     public function testFromListOfAllowableCharacters()
