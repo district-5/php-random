@@ -1,4 +1,5 @@
 <?php
+
 /**
  * District5 - Random
  *
@@ -14,7 +15,6 @@
  * The above copyright notice and this permission notice shall be included in
  * all licensed copies of the Software.
  */
-
 namespace District5\Random;
 
 /**

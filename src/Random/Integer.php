@@ -1,11 +1,11 @@
 <?php
+
 /**
  * District5 - Random
  *
  * @copyright District5
  *
  * @author District5
- * @author Roger Thomas <roger.thomas@district5.co.uk>
  * @link https://www.district5.co.uk
  *
  * @license This software and associated documentation (the "Software") may not be
@@ -14,9 +14,7 @@
  *
  * The above copyright notice and this permission notice shall be included in
  * all licensed copies of the Software.
- *
  */
-
 namespace District5\Random;
 
 /**
