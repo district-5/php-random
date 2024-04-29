@@ -39,7 +39,7 @@ class Seed
      *
      * @return string Seed string.
      */
-    private static function asString(): string
+    public static function asString(): string
     {
         $unique = str_split(uniqid());
         $additional = '';
