@@ -69,7 +69,7 @@ class Uuid
             $cost = 1;
         }
 
-        mt_srand(RandomSeed::get());
+        mt_srand(Seed::asInteger());
 
         $randChars = [];
         $c = 0;
