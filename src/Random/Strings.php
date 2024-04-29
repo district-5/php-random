@@ -113,8 +113,6 @@ class Strings
              */
             return strlen($strSoFar) > $length ? substr($strSoFar, 0, $length) : $strSoFar;
         }
-
-
     }
 
     /**
